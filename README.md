@@ -10,6 +10,12 @@ Autorender SDK adapter for React - Upload and ViewTag functionality.
 npm install @autorender/react
 ```
 
+## Authentication
+
+- **Upload API key**: Required for the upload widget. Never hardcode it in source — use an environment variable (e.g. `REACT_APP_AUTORENDER_KEY` for CRA, `VITE_AUTORENDER_KEY` for Vite) loaded at build time. Scope and rotate keys in the Autorender dashboard.
+- **Workspace**: The `workspace` value is not secret; it appears in public image URLs.
+- **ViewTag (ARImage / AutoRenderProvider)**: No API key required — image delivery is public CDN.
+
 ## Upload SDK Usage
 
 ```tsx
