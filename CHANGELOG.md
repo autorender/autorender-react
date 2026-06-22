@@ -1,5 +1,16 @@
 # @autorender/react
 
+## 0.3.2
+
+### Patch Changes
+
+- 307a0dd: Fix npm package metadata
+
+  Corrects the repository URL, homepage, and issue tracker links shown on the npm package page.
+
+- Updated dependencies [0f2ee5b]
+  - @autorender/js@0.3.3
+
 ## 0.3.1
 
 ### Patch Changes

@@ -1,6 +1,21 @@
-# @autorender/react
+# Autorender React SDK
 
-Autorender SDK adapter for React - Upload and ViewTag functionality.
+[![npm version](https://img.shields.io/npm/v/@autorender/react)](https://www.npmjs.com/package/@autorender/react)
+[![CI](https://github.com/autorenderhq/autorender-react/workflows/CI/badge.svg)](https://github.com/autorenderhq/autorender-react/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Follow on X](https://img.shields.io/twitter/follow/AutoRenderHQ?label=Follow&style=social)](https://x.com/AutoRenderHQ)
+
+## Introduction
+
+Autorender React SDK provides a simple way to integrate Autorender with your React applications. It allows you to:
+
+- Upload files with a fully-featured, customizable upload widget (`<AutorenderUploader>`)
+- Serve optimized images with automatic format selection, responsive sizes, and real-time transformations (`<ARImage>`, `<AutoRenderProvider>`)
+- Stream video with HLS and DASH support via an optional Video.js integration (`<ARVideo>`)
+
+## TypeScript support
+
+The SDK is written in TypeScript with full type definitions included. No additional `@types` packages needed.
 
 > **Browser-only:** The upload widget and ViewTag components use browser APIs. In Next.js App Router, import from `@autorender/react` or `@autorender/react/viewtag` (both include `'use client'`). In other SSR setups, render inside `useEffect` or a client boundary.
 
@@ -84,7 +99,6 @@ function ProductImage() {
       alt="Shoe"
       transformations={{
         fit: 'cover',
-        // See TransformOptions below for all available options
       }}
       responsive={true}
       lazy={true}
@@ -122,121 +136,6 @@ function ProductVideo() {
 ```
 
 Supports MP4, HLS (`.m3u8`), and DASH (`.mpd`) sources.
-
-### Complete Transform Example
-
-```tsx
-import { ARImage } from '@autorender/react';
-
-function AdvancedImage() {
-  return (
-    <ARImage
-      src="hero.jpg"
-      width={1200}
-      height={800}
-      alt="Hero image"
-      transformations={{
-        // Size & Crop
-        w: 1200,
-        h: 800,
-        fit: 'cover', // 'crop' | 'fill' | 'fit' | 'scale'
-        ar: '16:9', // Aspect ratio
-        position: 'center', // Position: 'p_c' | 'p_tl' | 'p_tr' | 'p_bl' | 'p_br' | 'p_t' | 'p_b' | 'p_l' | 'p_r' or full names
-        position_startagy: 'attention', // User passes: 'entropy' | 'attention' (SDK generates ps_*)
-        
-        // Transform
-        r: 0, // Rotation: number (0-360) | 'portrait' | 'landscape'
-        z: 1.2, // Zoom level
-        flip: 'h', // 'h' | 'v' | 'hv' | 'vh'
-        br: 20, // Border radius in pixels
-        
-        // Format & Quality
-        f: 'auto', // 'auto' | 'webp' | 'jpg' | 'png' | 'avif'
-        q: 'auto', // 'auto' | 'auto:best' | number (1-100)
-        
-        // Background
-        bg: 'rgb:FF5733', // Background color: 'rgb:RRGGBB' | 'white' | 'black'
-        
-        // DPR
-        dpr: 2, // Device pixel ratio (0.1-10)
-        
-        // Effects
-        improve: true, // Auto-enhancement: boolean | 'indoor' | 'outdoor' | { mode?: 'indoor' | 'outdoor', blend?: number }
-        unsharpMask: 100, // Unsharp mask strength (1-2000)
-        saturation: 20, // Saturation adjustment (-100 to 100)
-        contrast: 15, // Contrast adjustment (-100 to 100)
-        brightness: 10, // Brightness adjustment (-99 to 100)
-        gamma: 0, // Gamma correction (-50 to 150)
-        sharpen: 50, // Sharpen: boolean | number (1-2000)
-        grayscale: false, // Convert to grayscale
-        blackwhite: 50, // Black and white balance (0-100)
-        hue: 0, // Hue rotation (-180 to 180)
-        warmth: 0, // Warmth adjustment (-100 to 100)
-        tint: 0, // Tint adjustment (-100 to 100)
-        normalize: false, // Normalize histogram
-        invert: false, // Invert colors
-        fade: 0, // Fade effect (0-100)
-        vignette: 0, // Vignette strength (0-100)
-        highlights: 0, // Highlights adjustment (-100 to 100)
-        shadows: 0, // Shadows adjustment (-100 to 100)
-        exposure: 0, // Exposure adjustment (-100 to 100)
-        structure: 0, // Structure/clarity (0-100)
-        autoEnhance: false, // Auto enhance
-        temperature: 0, // Temperature adjustment (-100 to 100)
-        linear: '1:0', // Linear adjustment (a:b format)
-        recomb: '', // Recombination matrix
-        threshold: undefined, // Threshold: number | 'number:gray'
-        convolve: '', // Convolution kernel matrix
-        unflatten: false, // Unflatten layers
-        flatten: false, // Flatten layers
-        median: undefined, // Median filter (number)
-        blur: 0, // Blur amount (0-20)
-        extend: '', // Extend: 'top:right:bottom:left:color'
-        affine: '', // Affine transform: 'a,b,c,d'
-        extract: undefined, // Extract channel: 'red' | 'r' | 'green' | 'g' | 'blue' | 'b' | 'alpha' | 'a'
-        ensureAlpha: false, // Ensure alpha channel
-        removeAlpha: undefined, // Remove alpha: 'white' | 'black' | 'rgb:RRGGBB'
-        
-        // Layers
-        layers: [
-          {
-            type: 'image',
-            imagePath: 'logo.png',
-            layerType: 'overlay', // 'overlay' | 'underlay'
-            width: 200,
-            height: 200,
-            placement: 'north-east', // Use human-readable placement values
-            x: 0, // X offset
-            y: 0, // Y offset
-            opacity: 100, // Opacity (0-100)
-            rotation: 0, // Rotation in degrees
-          },
-          {
-            type: 'text',
-            text: 'Hello World',
-            fontFamily: 'arial',
-            fontSize: 24,
-            fontStyle: 'bold', // 'bold' | 'italic' | 'underline'
-            fontColor: 'FF0000', // Hex color without #
-            placement: 'south',
-            x: 0,
-            y: -20,
-            rotation: 0,
-          }
-        ],
-        
-        // Blend mode (for layers)
-        blend: 'overlay', // 'screen' | 'overlay' | 'multiply' | 'mask' | 'anti_removal'
-      }}
-      responsive={true}
-      lazy={true}
-      sizes="(min-width: 1200px) 1200px, 100vw"
-      className="product-image"
-      style={{ maxWidth: '100%' }}
-    />
-  );
-}
-```
 
 ### Use AR Instance Directly
 
@@ -315,134 +214,11 @@ Hook to access the AR instance from context.
 - `transformString(transform: TransformOptions): string` - Get transformation string only
 - `responsiveImageAttributes(options: ResponsiveOptions): ResponsiveAttributes` - Generate responsive image attributes
 - `getDPR(): number` - Get device pixel ratio
+
 ### `useAutorenderUploader(options)`
 
 Hook that returns a ref to the uploader instance.
 
-## TransformOptions Reference
-
-All transformation parameters available in the `transformations` prop:
-
-### Size & Crop
-- `w?: number` - Width in pixels (can be decimal for relative sizing)
-- `h?: number` - Height in pixels (can be decimal for relative sizing)
-- `fit?: 'crop' | 'fill' | 'fit' | 'scale'` - Crop mode
-- `ar?: string` - Aspect ratio (e.g., `"16:9"`, `"1:1"`, `"4:3"`)
-- `position?: 'p_c' | 'p_tl' | 'p_tr' | 'p_bl' | 'p_br' | 'p_t' | 'p_b' | 'p_l' | 'p_r' | 'center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top' | 'bottom' | 'left' | 'right'` - Position
-- `position_startagy?: 'entropy' | 'attention'` - Position strategy (SDK generates `ps_` prefix)
-
-### Transform
-- `r?: number | 'portrait' | 'landscape'` - Rotation in degrees (0-360) or special modes
-- `z?: number` - Zoom level multiplier (> 0)
-- `flip?: 'h' | 'v' | 'hv' | 'vh'` - Flip direction
-- `br?: number` - Border radius in pixels (>= 0)
-
-### Format & Quality
-- `f?: string` - Format: `"auto"` | `"webp"` | `"jpg"` | `"png"` | `"avif"` | `"gif"` | `"tiff"`
-- `q?: string | number` - Quality: `"auto"` | `"auto:best"` | number (1-100)
-
-### Background
-- `bg?: string` - Background color: `"rgb:FF5733"` | `"white"` | `"black"`
-
-### DPR
-- `dpr?: number` - Device pixel ratio (0.1-10)
-
-### Effects
-- `improve?: boolean | string | { mode?: 'indoor' | 'outdoor', blend?: number }` - Auto-enhancement
-- `unsharpMask?: number` - Unsharp mask strength (1-2000)
-- `saturation?: number` - Saturation adjustment (-100 to 100)
-- `contrast?: number` - Contrast adjustment (-100 to 100)
-- `brightness?: number` - Brightness adjustment (-99 to 100)
-- `gamma?: number` - Gamma correction (-50 to 150)
-- `sharpen?: boolean | number` - Sharpen (boolean or strength 1-2000)
-- `grayscale?: boolean` - Convert to grayscale
-- `blackwhite?: number` - Black and white balance (0-100)
-- `hue?: number` - Hue rotation (-180 to 180)
-- `warmth?: number` - Warmth adjustment (-100 to 100)
-- `tint?: number` - Tint adjustment (-100 to 100)
-- `normalize?: boolean` - Normalize histogram
-- `invert?: boolean` - Invert colors
-- `fade?: number` - Fade effect (0-100)
-- `vignette?: number` - Vignette strength (0-100)
-- `highlights?: number` - Highlights adjustment (-100 to 100)
-- `shadows?: number` - Shadows adjustment (-100 to 100)
-- `exposure?: number` - Exposure adjustment (-100 to 100)
-- `structure?: number` - Structure/clarity (0-100)
-- `autoEnhance?: boolean` - Auto enhance
-- `temperature?: number` - Temperature adjustment (-100 to 100)
-- `linear?: string` - Linear adjustment (`"a:b"` format)
-- `recomb?: string` - Recombination matrix
-- `threshold?: number | string` - Threshold (number or `"number:gray"`)
-- `convolve?: string` - Convolution kernel matrix
-- `unflatten?: boolean` - Unflatten layers
-- `flatten?: boolean` - Flatten layers
-- `median?: number` - Median filter
-- `blur?: number` - Blur amount (0-20)
-- `extend?: string` - Extend (`"top:right:bottom:left:color"`)
-- `affine?: string` - Affine transform (`"a,b,c,d"`)
-- `extract?: 'red' | 'r' | 'green' | 'g' | 'blue' | 'b' | 'alpha' | 'a'` - Extract channel
-- `ensureAlpha?: boolean` - Ensure alpha channel
-- `removeAlpha?: string` - Remove alpha (`"white"` | `"black"` | `"rgb:RRGGBB"`)
-
-### Layers
-- `layers?: LayerOptions[]` - Array of layer options (see below)
-- `blend?: 'screen' | 'overlay' | 'multiply' | 'mask' | 'anti_removal'` - Blend mode for layers
-
-### LayerOptions
-
-#### Image Layer
-```typescript
-{
-  type: 'image',
-  imagePath: string, // Path to overlay image
-  layerType?: 'overlay' | 'underlay',
-  width?: number,
-  height?: number,
-  placement?:
-    | 'none'
-    | 'north'
-    | 'south'
-    | 'east'
-    | 'west'
-    | 'center'
-    | 'north-west'
-    | 'north-east'
-    | 'south-west'
-    | 'south-east',
-  x?: number, // X offset
-  y?: number, // Y offset
-  opacity?: number, // 0-100
-  rotation?: number, // Rotation in degrees
-  // ... other image layer options
-}
-```
-
-#### Text Layer
-```typescript
-{
-  type: 'text',
-  text: string, // Text content
-  fontFamily?: string, // Font family (e.g., 'arial')
-  fontSize?: number, // Font size in pixels
-  fontStyle?: 'bold' | 'italic' | 'underline',
-  fontColor?: string, // Hex color without # (e.g., 'FF0000')
-  placement?:
-    | 'none'
-    | 'north'
-    | 'south'
-    | 'east'
-    | 'west'
-    | 'center'
-    | 'north-west'
-    | 'north-east'
-    | 'south-west'
-    | 'south-east',
-  x?: number, // X offset
-  y?: number, // Y offset
-  rotation?: number, // Rotation in degrees
-}
-```
-
 ## Documentation
 
-See the [full documentation](https://autorender.mintlify.app) for complete API reference.
+See the [full documentation](https://autorender.mintlify.app) for the complete API reference, including all `TransformOptions` parameters (crop, effects, layers, and more).
