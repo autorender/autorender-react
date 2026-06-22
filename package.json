@@ -1,0 +1,93 @@
+{
+  "name": "@autorender/react",
+  "version": "0.3.1",
+  "description": "Autorender SDK for React — file upload widget, AutoRenderProvider, ARImage / ViewTag transforms (including remote https fetch).",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "browser": "./dist/index.js",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./viewtag": {
+      "import": {
+        "types": "./dist/viewtag.d.ts",
+        "browser": "./dist/viewtag.js",
+        "default": "./dist/viewtag.js"
+      },
+      "require": {
+        "types": "./dist/viewtag.d.cts",
+        "default": "./dist/viewtag.cjs"
+      }
+    },
+    "./styles": {
+      "default": "./dist/styles.css"
+    },
+    "./dist/styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "autorender sdk",
+    "autorender",
+    "sdk",
+    "viewtag",
+    "image",
+    "upload",
+    "react"
+  ],
+  "author": "Autorender",
+  "license": "MIT",
+  "sideEffects": [
+    "*.css",
+    "dist/*.css"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/autorenderhq/autorender-react.git"
+  },
+  "homepage": "https://github.com/autorenderhq/autorender-react#readme",
+  "bugs": {
+    "url": "https://github.com/autorenderhq/autorender-react/issues"
+  },
+  "dependencies": {
+    "@autorender/js": "^0.3.1"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "video.js": "^8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "video.js": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "video.js": "^8.23.4"
+  }
+}
