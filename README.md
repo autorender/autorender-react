@@ -65,12 +65,12 @@ function App() {
 - **DPR** — `enableDPR={true}` (default) injects `dpr_2` on high-DPI displays
 - **Quality** — `defaults={{ q: 'auto' }}` adjusts quality from connection type (2g/3g/4g)
 
-See [ViewTag API reference](https://autorender.mintlify.app) in `@autorender/js` for details.
+See [ViewTag API reference](https://autorender.io/docs) in `@autorender/js` for details.
 
 ### Setup Provider
 
 ```tsx
-import { AutoRenderProvider } from '@autorender/react';
+import { AutoRenderProvider } from '@autorender/react/viewtag';
 
 function App() {
   return (
@@ -88,7 +88,7 @@ function App() {
 ### Use ARImage Component
 
 ```tsx
-import { ARImage } from '@autorender/react';
+import { ARImage } from '@autorender/react/viewtag';
 
 function ProductImage() {
   return (
@@ -137,10 +137,53 @@ function ProductVideo() {
 
 Supports MP4, HLS (`.m3u8`), and DASH (`.mpd`) sources.
 
+### Common video transformations
+
+Some transforms produce an image (thumbnail, GIF) — use `<ARImage>` for those instead of `<ARVideo>`.
+
+```tsx
+// Thumbnail frame — use ARImage, not ARVideo
+<ARImage
+  src="docs/skateboarding.mp4"
+  width={320}
+  height={220}
+  alt="Thumbnail"
+  transformations={{ thumb_ar: true }}
+/>
+
+// Animated GIF — use ARImage
+<ARImage
+  src="docs/skateboarding.mp4"
+  width={320}
+  height={220}
+  alt="GIF preview"
+  transformations={{ f: 'gif' }}
+/>
+
+// Trim a clip (2s – 8s)
+<ARVideo
+  src="docs/skateboarding.mp4"
+  width={720}
+  height={405}
+  controls
+  transformations={{ so: 2, eo: 8 }}
+/>
+
+// Pad to 16:9 with white background
+<ARVideo
+  src="docs/skateboarding.mp4"
+  width={720}
+  height={405}
+  controls
+  transformations={{ ar: '16:9', cm_pad_resize: true, bg: 'white' }}
+/>
+```
+
+
 ### Use AR Instance Directly
 
 ```tsx
-import { useAutoRender } from '@autorender/react';
+import { useAutoRender } from '@autorender/react/viewtag';
 
 function MyComponent() {
   const AR = useAutoRender();
@@ -221,4 +264,4 @@ Hook that returns a ref to the uploader instance.
 
 ## Documentation
 
-See the [full documentation](https://autorender.mintlify.app) for the complete API reference, including all `TransformOptions` parameters (crop, effects, layers, and more).
+See the [full documentation](https://autorender.io/docs) for the complete API reference, including all `TransformOptions` parameters (crop, effects, layers, and more).
