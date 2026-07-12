@@ -1,7 +1,7 @@
 # Autorender React SDK
 
 [![npm version](https://img.shields.io/npm/v/@autorender/react)](https://www.npmjs.com/package/@autorender/react)
-[![CI](https://github.com/autorenderhq/autorender-react/workflows/CI/badge.svg)](https://github.com/autorenderhq/autorender-react/actions)
+[![CI](https://github.com/autorender/autorender-react/workflows/CI/badge.svg)](https://github.com/autorender/autorender-react/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Follow on X](https://img.shields.io/twitter/follow/AutoRenderHQ?label=Follow&style=social)](https://x.com/AutoRenderHQ)
 
