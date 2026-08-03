@@ -1,6 +1,6 @@
 {
   "name": "@autorender/react",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Autorender SDK for React — file upload widget, AutoRenderProvider, ARImage / ViewTag transforms (including remote https fetch).",
   "type": "module",
   "main": "dist/index.cjs",
@@ -27,6 +27,17 @@
       "require": {
         "types": "./dist/viewtag.d.cts",
         "default": "./dist/viewtag.cjs"
+      }
+    },
+    "./viewtag/video": {
+      "import": {
+        "types": "./dist/viewtag-video.d.ts",
+        "browser": "./dist/viewtag-video.js",
+        "default": "./dist/viewtag-video.js"
+      },
+      "require": {
+        "types": "./dist/viewtag-video.d.cts",
+        "default": "./dist/viewtag-video.cjs"
       }
     },
     "./styles": {
@@ -70,7 +81,7 @@
     "url": "https://github.com/autorender/autorender-react/issues"
   },
   "dependencies": {
-    "@autorender/js": "^0.3.5"
+    "@autorender/js": "^0.4.0"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

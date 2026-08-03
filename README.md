@@ -62,7 +62,7 @@ function App() {
 **Automatic optimizations** (via provider defaults and `enableDPR`):
 
 - **Format** — `defaults={{ f: 'auto' }}` picks AVIF, WebP, or JPEG based on browser support
-- **DPR** — `enableDPR={true}` (default) injects `dpr_2` on high-DPI displays
+- **DPR** — `enableDPR={true}` (default) adds a `2x` candidate to the `srcset`, so high-DPI displays get `dpr_2` and the markup stays the same on the server and in the browser
 - **Quality** — `defaults={{ q: 'auto' }}` adjusts quality from connection type (2g/3g/4g)
 
 See [ViewTag API reference](https://autorender.io/docs) in `@autorender/js` for details.
@@ -116,10 +116,10 @@ Install `video.js` when you use `<ARVideo>` (optional peer dependency — upload
 npm install video.js
 ```
 
-Import ViewTag components from `@autorender/react/viewtag`:
+`<ARVideo>` has its own entry point, `@autorender/react/viewtag/video`, so image-only apps never pull `video.js` into their bundle. Every other ViewTag component comes from `@autorender/react/viewtag`.
 
 ```tsx
-import { ARVideo } from '@autorender/react/viewtag';
+import { ARVideo } from '@autorender/react/viewtag/video';
 
 function ProductVideo() {
   return (
@@ -230,7 +230,7 @@ React Context Provider that makes AR instance available to child components.
 - `defaults?: { f?: string, q?: string | number }` - Default transformations
 - `deviceBreakpoints?: number[]` - Device breakpoints for responsive images
 - `imageBreakpoints?: number[]` - Image breakpoints for responsive images
-- `enableDPR?: boolean` - Enable device pixel ratio (default: `true`)
+- `enableDPR?: boolean` - Emit a `2x` candidate in responsive srcsets (default: `true`). Does not affect `url()`.
 - `enableResponsive?: boolean` - Enable responsive images (default: `true`)
 
 ### `<ARImage />`

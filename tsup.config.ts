@@ -9,6 +9,7 @@ export default defineConfig({
   entry: {
     index: 'src/index.tsx',
     viewtag: 'src/viewtag/index.tsx',
+    'viewtag-video': 'src/video-entry.ts',
   },
   splitting: false,
   clean: true,
