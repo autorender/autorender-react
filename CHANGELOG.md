@@ -1,5 +1,18 @@
 # @autorender/react
 
+## 0.4.2
+
+### Patch Changes
+
+- Version-only release so existing lock files resolve `@autorender/js@0.5.0` on `npm update`. No code changes from **0.4.1**.
+
+## 0.4.1
+
+### Patch Changes
+
+- Updated dependencies [8f7d86a]
+  - @autorender/js@0.5.0
+
 ## 0.4.0
 
 ### Minor Changes
