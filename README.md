@@ -27,7 +27,15 @@ npm install @autorender/react
 
 ## Authentication
 
-- **Upload API key**: Required for the upload widget. Never hardcode it in source — use an environment variable (e.g. `REACT_APP_AUTORENDER_KEY` for CRA, `VITE_AUTORENDER_KEY` for Vite) loaded at build time. Scope and rotate keys in the Autorender dashboard.
+- **Use your public key.** The uploader runs in the browser, so whatever key you give it is
+  visible to every visitor. Autorender gives each workspace a **public key** that can only
+  upload — the API answers `403` for anything else — so shipping it is safe by design. Load it
+  from an env var — `REACT_APP_AUTORENDER_PUBLIC_KEY` for CRA, `VITE_AUTORENDER_PUBLIC_KEY` for
+  Vite — and never put a private key in client code: a private key can read, rename and delete
+  every asset in the workspace. Both keys are on the **API Keys** page in the dashboard, where
+  the public key is always visible.
+- **The public key needs no rotation** and cannot be revoked. Uploading is all it permits, and
+  upload rate limits are per workspace, so throttle your own surface if abuse is a concern.
 - **Workspace**: The `workspace` value is not secret; it appears in public image URLs.
 - **ViewTag (ARImage / AutoRenderProvider)**: No API key required — image delivery is public CDN.
 
@@ -40,7 +48,7 @@ import '@autorender/react/styles';
 function App() {
   return (
     <AutorenderUploader
-      apiKey={process.env.REACT_APP_AUTORENDER_KEY}
+      apiKey={process.env.REACT_APP_AUTORENDER_PUBLIC_KEY}
       type="inline"
       allowMultiple
       theme="system"
